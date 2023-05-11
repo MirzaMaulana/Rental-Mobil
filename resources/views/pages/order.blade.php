@@ -171,6 +171,7 @@
                     <div class="col-md-12 my-2">
                         <button
                             class="btn btn-success w-100"
+                            type="submit"
                             {{ !auth()->check() ? "disabled" : "" }}
                         >
                             Pesan Sekarang

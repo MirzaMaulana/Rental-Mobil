@@ -41,7 +41,7 @@ class BookingController extends Controller
         //menyimpan data
         $booking = Booking::create($data);
 
-        return redirect('/cars');
+        return redirect('/cars')->with('success', 'Anda Berhasil Membuat Pesanan Mohon Menunggu Admin Untuk Menkonfirmasi');
     }
 
     public function index()

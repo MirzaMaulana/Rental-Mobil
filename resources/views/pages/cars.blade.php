@@ -1,6 +1,23 @@
 @extends("layouts.app")
 @section("content")
     <section class="container mt-4">
+        @if(session()->has("success"))
+            <div
+                class="alert alert-success absolute alert-dismissible fade show container"
+                role="alert"
+            >
+                {{ session("success") }}
+                Atau
+                <a href="{{ route("pesanan") }}">Cek Pesananmu Disini</a>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+            </div>
+        @endif
+
         <div class="jumbotron text-center">
             <h3 class="fw-bold lh-md">Choose the car of your dreams</h3>
             <p class="text-secondary">

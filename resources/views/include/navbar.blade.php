@@ -77,7 +77,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href=""><i class="bi bi-bell"></i> Pesanan Saya</a>
+                            <a class="dropdown-item" href="{{ route('pesanan') }}"><i class="bi bi-bell"></i> Pesanan Saya</a>
                             @if (auth()->user()->role != "user")
                                 <a class="dropdown-item" href="{{ route('dashboard') }}"><i class="bi bi-grid"></i> Dashboard</a>
                             @endif

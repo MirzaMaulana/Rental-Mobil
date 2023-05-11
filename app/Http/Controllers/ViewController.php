@@ -40,4 +40,9 @@ class ViewController extends Controller
             'cars' => $cars
         ]);
     }
+    public function pesanan()
+    {
+        $bookings = Booking::where('user_id', auth()->user()->id)->get();
+        return view('pages.pesanan', ['bookings' => $bookings]);
+    }
 }

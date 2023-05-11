@@ -31,6 +31,7 @@ Route::get('/cars/order/{car_id}', [ViewController::class, 'order'])->name('orde
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.input');
+    Route::get('/pesanan', [ViewController::class, 'pesanan'])->name('pesanan');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

@@ -1,6 +1,21 @@
 @extends("layouts.app")
 @section("content")
     <section id="header" class="container mx-auto mt-2">
+        @if(session()->has("success"))
+            <div
+                class="alert alert-success absolute alert-dismissible fade show container"
+                role="alert"
+            >
+                {{ session("success") }}
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+            </div>
+        @endif
+
         <div
             id="carouselExampleLight"
             class="carousel slide"
