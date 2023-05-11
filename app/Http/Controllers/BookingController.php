@@ -102,24 +102,7 @@ class BookingController extends Controller
     {
         $validatedData = $request->validate([
             'status' => ['required'],
-            'car_id' => ['required', 'integer'],
         ]);
-
-
-        //jika status diubah ke dalam peminjaman maka kurangi unit di table cars
-        if ($validatedData['status'] == 'Disewa') {
-            //mengurangi unit
-            $car = Cars::find($validatedData['car_id']);
-            $car->jumlah_unit -= 1;
-            $car->save();
-        }
-        //jika status diubah ke pengembalian maka kembalikan unit di table cars
-        elseif ($validatedData['status'] == 'Selesai') {
-            //menambah unit
-            $car = Cars::find($validatedData['car_id']);
-            $car->jumlah_unit += 1;
-            $car->save();
-        }
 
         $booking->update($validatedData);
 
