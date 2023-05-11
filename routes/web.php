@@ -59,6 +59,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::controller(DriverController::class)->group(function () {
             Route::post('/store', 'store')->name('driver.input');
             Route::delete('/{driver}', 'destroy')->name('driver.destroy');
+            Route::put('/update/{driver}', 'update')->name('driver.update');
             Route::get('/index',  'list')->name('driver.list');
             Route::get('/list',  'index')->name('driver.index');
         });

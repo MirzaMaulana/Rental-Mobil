@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('alamat');
-            $table->integer('nomer_hp');
+            $table->unsignedBigInteger('nomer_hp');
             $table->enum('jenis_kelamin', ['Laki-Laki', 'Perempuan']);
+            $table->enum('status', ['Tersedia', 'Disewa']);
             $table->timestamps();
         });
     }

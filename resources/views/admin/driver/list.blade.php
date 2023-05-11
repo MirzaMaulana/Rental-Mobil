@@ -23,6 +23,7 @@
                                     <th>Alamat</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Nomer HP</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -32,6 +33,10 @@
             </div>
         </div>
     </div>
+    @foreach($drivers as $driver)
+        @include("admin.driver.modaledit")
+    @endforeach
+
     @include("admin.driver.modal")
     <script>
         $(document).ready(function () {
@@ -50,6 +55,7 @@
                     { data: "alamat" },
                     { data: "jenis_kelamin" },
                     { data: "nomer_hp", sortable: false },
+                    { data: "status" },
                     { data: "action", sortable: false, searchable: false },
                 ],
             });
