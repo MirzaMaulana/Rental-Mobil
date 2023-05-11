@@ -82,6 +82,11 @@ class BookingController extends Controller
                 return $unit->car->name;
             })
 
+            ->addColumn('driver', function ($driver) {
+                $driver = $driver->driver == '1' ? '<small class="badge badge-success">IYA</small>' : '<small class="badge badge-danger">TIDAK</small>';
+                return $driver;
+            })
+
             ->addColumn('bukti_image', function ($booking) {
                 return '<img id="bukti" src="' . asset('storage/pembayaran/' . $booking->bukti_image) . '" alt="' . $booking->bukti_image . '" height="50" />';
             })

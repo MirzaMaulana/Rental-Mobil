@@ -12,6 +12,7 @@
                                     <th>No</th>
                                     <th>Nama Mobil</th>
                                     <th>Nama User</th>
+                                    <th>Driver</th>
                                     <th>Hari</th>
                                     <th>Alamat</th>
                                     <th>Nomer HP</th>
@@ -43,6 +44,7 @@
                     { data: "DT_RowIndex", sortable: false, searchable: false },
                     { data: "car_name" },
                     { data: "name" },
+                    { data: "driver" },
                     { data: "days" },
                     { data: "alamat" },
                     { data: "nomer_hp" },
