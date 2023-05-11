@@ -19,7 +19,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>{{ $booking->nomer_hp }}</td>
+                                    <td>HP: {{ $booking->nomer_hp }}</td>
                                     <td colspan="2">
                                         Hari Sewa:
                                         {{ $booking->days }}
@@ -34,10 +34,33 @@
                                 class="text-muted d-flex justify-content-between"
                             >
                                 {{ $booking->created_at }}
-                                <small class="btn btn-sm btn-success">
+
+                                <small class="btn btn-sm btn-warning">
                                     {{ $booking->status }}
                                 </small>
                             </small>
+                            @if($booking->status == "Disewa")
+                                <form
+                                    action="{{ route("booking.update", $booking->id) }}"
+                                    method="POST"
+                                >
+                                    @csrf
+                                    @method("put")
+                                    <input
+                                        type="hidden"
+                                        name="car_id"
+                                        value="{{ $booking->car_id }}"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="status"
+                                        value="Selesai"
+                                    />
+                                    <button class="btn-success btn btn-sm px-5">
+                                        Selesai
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
