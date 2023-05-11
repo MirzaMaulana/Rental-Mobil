@@ -36,11 +36,16 @@
             >
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link active">
+                <li
+                    class="nav-item has-treeview {{ Request::is("car*") || Request::is("unit*") ? "menu-open" : "" }}"
+                >
+                    <a
+                        href="#"
+                        class="nav-link {{ Request::is("car*") || Request::is("unit*") ? "active" : "" }}"
+                    >
                         <i class="nav-icon fas fa-car"></i>
                         <p>
-                            Car units
+                            Car
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -65,8 +70,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li
+                    class="nav-item has-treeview {{ Request::is("driver*") ? "menu-open" : "" }}"
+                >
+                    <a
+                        href="#"
+                        class="nav-link {{ Request::is("driver*") ? "active" : "" }}"
+                    >
                         <i class="nav-icon fas fa-user-tie"></i>
                         <p>
                             Driver
@@ -91,8 +101,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li
+                    class="nav-item has-treeview {{ Request::is("booking*") ? "menu-open" : "" }}"
+                >
+                    <a
+                        href="#"
+                        class="nav-link {{ Request::is("booking*") ? "active" : "" }}"
+                    >
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Administrasi
