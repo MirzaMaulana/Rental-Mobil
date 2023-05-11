@@ -7,7 +7,7 @@
             class="brand-image img-circle elevation-3"
             style="opacity: 0.8"
         />
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">Car Rental</span>
     </a>
 
     <!-- Sidebar -->
@@ -22,7 +22,7 @@
                 />
             </div>
             <div class="info">
-                <a href="#" class="d-block">John Doe</a>
+                <a href="#" class="d-block">{{ auth()->user()->name }}</a>
             </div>
         </div>
 
