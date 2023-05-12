@@ -107,10 +107,7 @@
         </div>
         <div class="row mt-3 mb-5 justify-content-between">
             @foreach($cars as $car)
-                <div
-                    class="card col-md-4 py-4 border-0 shadow-sm"
-                    style="widht: 20rem"
-                >
+                <div class="card col-md-4 py-4 border-0 shadow-sm">
                     <h5 class="fw-bold">{{ $car->name }}</h5>
                     <small class="fw-semibold lh-md text-secondary">
                         {{ $car->type }}

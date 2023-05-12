@@ -9,6 +9,54 @@
         @endif
 
         <div class="row">
+            <div class="col-md-5">
+                <div>
+                    <div
+                        class="card p-4 border-0 shadow-sm"
+                        style="widht: 20rem"
+                    >
+                        <h5 class="fw-bold">{{ $car->name }}</h5>
+                        <small class="fw-semibold lh-md text-secondary">
+                            {{ $car->type }}
+                        </small>
+                        <img
+                            src="{{ asset("/storage/cars/" . $car->image) }}"
+                            class="card-img-top"
+                            alt="{{ $car->name }}"
+                        />
+                        <div class="mt-3 d-flex justify-content-between">
+                            <span class="d-flex flex-column">
+                                <small class="mb-2 fw-semibold">
+                                    Rp.
+                                    {{ $car->price }}
+                                    / day
+                                </small>
+                                <small class="fw-semibold mb-2">
+                                    <i class="bi bi-person-fill"></i>
+                                    {{ $car->seats }}
+                                    Seats
+                                </small>
+                                <small
+                                    class="fw-semibold {{ $car->status == "Tersedia" ? "text-success" : "text-warning" }}"
+                                >
+                                    <i class="bi bi-car-front"></i>
+                                    {{ $car->status }}
+                                </small>
+                            </span>
+                            <span class="d-flex flex-column">
+                                <small class="mb-2 fw-semibold">
+                                    <i class="bi bi-gear-fill"></i>
+                                    {{ $car->gear }}
+                                </small>
+                                <small class="fw-semibold mb-2">
+                                    <i class="bi bi-fuel-pump-fill"></i>
+                                    {{ $car->bensin }}
+                                </small>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-7 p-3 card mx-auto border-0 shadow">
                 <p class="fw-semibold text-center">
                     Isi Lengkap Formulir Dibawah Ini!
