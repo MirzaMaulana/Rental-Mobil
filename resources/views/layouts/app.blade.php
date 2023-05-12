@@ -8,6 +8,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
         <title>{{ config("app.name", "Car rental") }}</title>
+        <link
+            rel="shortcut icon"
+            href="{{ asset("car-icon.png") }}"
+            type="image/x-icon"
+        />
 
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
