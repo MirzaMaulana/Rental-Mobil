@@ -24,11 +24,15 @@ Route::get('/', [ViewController::class, 'welcome'])->name('home');
 
 Auth::routes();
 
+//route ke dashboard
 Route::get('/dashboard', [ViewController::class, 'dashboard'])->middleware(['auth', 'admin'])->name('dashboard');
 
+// pages
+Route::get('/about', [ViewController::class, 'about'])->name('about');
 Route::get('/cars', [ViewController::class, 'cars'])->name('cars');
 Route::get('/cars/order/{car_id}', [ViewController::class, 'order'])->name('order');
 
+//membuat pesanan dan melihat pesanan saya
 Route::middleware(['auth'])->group(function () {
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.input');
     Route::get('/pesanan', [ViewController::class, 'pesanan'])->name('pesanan');

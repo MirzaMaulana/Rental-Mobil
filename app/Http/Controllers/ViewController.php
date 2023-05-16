@@ -18,12 +18,14 @@ class ViewController extends Controller
     {
         $users = User::all();
         $units = Unit::all();
+        $pendapatan = Booking::sum('total_price');
         $booking = Booking::where('status', '<>', 'Selesai')->get();
 
         return view(
             'admin.dashboard',
             [
                 'users' => $users,
+                'pendapatan' => $pendapatan,
                 'units' => $units,
                 'booking' => $booking
             ]
@@ -33,9 +35,14 @@ class ViewController extends Controller
     {
         return view('pages.order', ['car' => $car_id]);
     }
-    public function cars()
+    public function cars(Request $request)
     {
-        $cars = Cars::all();
+        if ($request->search) {
+            $cars = Cars::where('name', 'like', '%' . $request->search . '%')->get();
+        } else {
+            $cars = Cars::all();
+        }
+
         return view('pages.cars', [
             'cars' => $cars
         ]);
@@ -44,5 +51,9 @@ class ViewController extends Controller
     {
         $bookings = Booking::where('user_id', auth()->user()->id)->get();
         return view('pages.pesanan', ['bookings' => $bookings]);
+    }
+    public function about()
+    {
+        return view('pages.about');
     }
 }

@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-7 p-3 card mx-auto border-0 shadow">
+            <div class="col-md-7 p-3 card mx-auto border-0 shadow-sm">
                 <p class="fw-semibold text-center">
                     Isi Lengkap Formulir Dibawah Ini!
                 </p>

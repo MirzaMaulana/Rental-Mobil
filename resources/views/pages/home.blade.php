@@ -58,11 +58,14 @@
                 </div>
             </div>
             <form
+                action="/cars"
+                method="GET"
                 class="w-50 d-flex bg-light rounded-5 position-absolute start-50 translate-middle shadow"
             >
                 <input
                     class="form-control border-0 me-2 rounded-5"
                     type="text"
+                    name="search"
                     placeholder="Find the car of your dreams"
                 />
                 <button class="btn btn-lg btn-success rounded-5">

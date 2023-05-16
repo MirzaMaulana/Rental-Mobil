@@ -27,13 +27,19 @@
                 That is why there are only world-class cars in our fleet
             </p>
         </div>
-        <form class="w-50 d-flex my-4 bg-light rounded-5 mx-auto shadow">
+        <form
+            action="/cars"
+            method="GET"
+            class="w-50 d-flex my-4 bg-light rounded-5 mx-auto shadow"
+        >
             <input
                 class="form-control border-0 me-2 rounded-5"
                 type="text"
+                name="search"
                 placeholder="Find the car of your dreams"
+                placeholder="{{ old("search") }}"
             />
-            <button class="btn btn-lg btn-success rounded-5">
+            <button class="btn btn-lg btn-success rounded-5" type="submit">
                 <i class="bi bi-search"></i>
             </button>
         </form>

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg px-5 py-3 mx-auto">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img src="{{ asset("Logo.png") }}" alt="logo" height="40" />
         </a>
         <button
@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">
+                    <a class="nav-link" aria-current="page" href="{{ route('about') }}">
                         About Us
                     </a>
                 </li>
