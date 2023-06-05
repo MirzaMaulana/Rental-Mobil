@@ -8,6 +8,7 @@ use App\Http\Controllers\ViewController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ListController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,16 +39,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pesanan', [ViewController::class, 'pesanan'])->name('pesanan');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin', 'superadmin'])->group(function () {
     Route::prefix('car')->group(function () {
         Route::controller(CarsController::class)->group(function () {
             Route::get('/create', 'create')->name('car.create');
+            Route::get('/edit/{car}', 'edit')->name('car.edit');
+            Route::put('/edit/{car}', 'update')->name('car.update');
             Route::post('/store', 'store')->name('car.input');
             Route::delete('/{car}', 'destroy')->name('car.destroy');
             Route::get('/index',  'list')->name('car.list');
             Route::get('/list',  'index')->name('car.index');
         });
     })->name('car');
+
+
 
     Route::prefix('unit')->group(function () {
         Route::controller(UnitController::class)->group(function () {
@@ -81,4 +86,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/index/selesai', [ListController::class, 'listSelesai'])->name('booking.selesai.list');
         Route::get('/list/selesai', [ListController::class, 'selesai'])->name('booking.selesai');
     })->name('booking');
+});
+Route::prefix('user')->middleware('superadmin')->group(function () {
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/index', 'list')->name('user.list');
+        Route::get('/list', 'index')->name('user.index');
+    });
 });

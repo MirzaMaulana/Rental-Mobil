@@ -18,6 +18,7 @@ class ViewController extends Controller
     {
         $users = User::all();
         $units = Unit::all();
+        $new_order = Booking::where('status', 'Pending')->count();
         $pendapatan = Booking::sum('total_price');
         $booking = Booking::where('status', '<>', 'Selesai')->get();
 
@@ -27,7 +28,8 @@ class ViewController extends Controller
                 'users' => $users,
                 'pendapatan' => $pendapatan,
                 'units' => $units,
-                'booking' => $booking
+                'booking' => $booking,
+                'new_order' => $new_order
             ]
         );
     }
@@ -49,9 +51,10 @@ class ViewController extends Controller
     }
     public function pesanan()
     {
-        $bookings = Booking::where('user_id', auth()->user()->id)->get();
+        $bookings = Booking::where('user_id', auth()->user()->id)->latest('created_at')->get();
         return view('pages.pesanan', ['bookings' => $bookings]);
     }
+
     public function about()
     {
         return view('pages.about');

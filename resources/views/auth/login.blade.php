@@ -89,10 +89,10 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="" style="margin-top: -10px">
+                                <div class="" style="margin-top: -8px">
                                     @if(Route::has("password.request"))
                                         <a
-                                            class="btn btn-link"
+                                            class="btn btn-link text-decoration-none"
                                             href="{{ route("password.request") }}"
                                         >
                                             {{ __("Forgot Your Password?") }}

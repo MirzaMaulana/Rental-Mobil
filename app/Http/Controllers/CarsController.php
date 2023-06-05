@@ -32,6 +32,7 @@ class CarsController extends Controller
             </button>
             </td>
             </form>
+            <a href="' . route('car.edit', $car->id) . '" class="btn btn-sm btn-primary rounded"><i class="fa fa-pen"></i></a>
              </div>  
         ';
             })
@@ -55,6 +56,8 @@ class CarsController extends Controller
         $car->delete();
 
         return redirect()->back();
+
+        toastr()->success('Sukses Menghapus Mobil');
     }
 
     public function store(Request $request)
@@ -90,6 +93,53 @@ class CarsController extends Controller
         //menyimpan data
         $car = Cars::create($data);
 
+        toastr()->success('Sukses Menambahkan Mobil');
+        return redirect('/car/list');
+    }
+    public function edit($id)
+    {
+        $car = Cars::find($id);
+        return view('admin.cars.editcar', ['car' => $car]);
+    }
+
+    public function update(Request $request, Cars $car)
+    {
+        //memvalidasi input
+        $validatedData = $request->validate([
+            'name' => ['required', 'max:255'],
+            'type' => ['required', 'max:255'],
+            'seats' => ['required'],
+            'price' => ['required', 'integer'],
+            'bensin' => ['required', 'string'],
+            'gear' => ['required', 'string'],
+            'jumlah_unit' => ['required'],
+            'status' => ['required'],
+        ]);
+
+        if ($request->image) {
+            $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('public/cars', $filename);
+            $data = ['image' => $filename];
+        }
+
+
+        $data = [
+            'name' => $validatedData['name'],
+            'type' => $validatedData['type'],
+            'seats' => $validatedData['seats'],
+            'price' => $validatedData['price'],
+            'bensin' => $validatedData['bensin'],
+            'gear' => $validatedData['gear'],
+            'jumlah_unit' => $validatedData['jumlah_unit'],
+            'status' => $validatedData['status'],
+        ];
+
+
+        //menyimpan data
+        $car = Cars::find($car->id);
+
+        $car->update($data);
+        toastr()->success('Sukses Mengupdate Mobil');
         return redirect('/car/list');
     }
 }

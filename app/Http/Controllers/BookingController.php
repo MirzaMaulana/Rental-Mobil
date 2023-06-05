@@ -40,7 +40,6 @@ class BookingController extends Controller
 
         //menyimpan data
         $booking = Booking::create($data);
-
         return redirect('/cars')->with('success', 'Anda Berhasil Membuat Pesanan Mohon Menunggu Admin Untuk Menkonfirmasi');
     }
 
@@ -106,6 +105,7 @@ class BookingController extends Controller
 
         $booking->update($validatedData);
 
+        toastr()->success('Sukses Mengupdate data pesanan');
         return redirect()->back();
     }
     public function destroy(Booking $booking)
@@ -117,5 +117,6 @@ class BookingController extends Controller
         $booking->delete();
 
         return redirect()->back();
+        toastr()->success('Sukses Menghapus');
     }
 }

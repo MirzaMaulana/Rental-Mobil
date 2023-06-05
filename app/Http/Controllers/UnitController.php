@@ -25,6 +25,7 @@ class UnitController extends Controller
         $car->jumlah_unit += 1;
         $car->save();
 
+        toastr()->success("Sukses Menambahkan Unit Di $car->name");
         return redirect()->back();
     }
 
@@ -85,26 +86,32 @@ class UnitController extends Controller
 
         //jika status diubah ke dalam peminjaman maka kurangi unit di table cars
         if ($validatedData['status'] == 'Disewa') {
-            //mengurangi unit
-            $car = Cars::find($validatedData['car_id']);
-            $car->jumlah_unit -= 1;
-            $car->save();
+            if ($validatedData['status'] != Unit::find($id)->status) {
+                ///mengurangi unit
+                $car = Cars::find($validatedData['car_id']);
+                $car->jumlah_unit -= 1;
+                $car->save();
+            }
         }
         //jika status diubah ke pengembalian maka kembalikan unit di table cars
         elseif ($validatedData['status'] == 'Tersedia') {
-            //menambah unit
-            $car = Cars::find($validatedData['car_id']);
-            $car->jumlah_unit += 1;
-            $car->save();
+            if ($validatedData['status'] != Unit::find($id)->status) {
+                // Menambah unit
+                $car = Cars::find($validatedData['car_id']);
+                $car->jumlah_unit += 1;
+                $car->save();
+            }
         }
-        $unit = Unit::where('id', $id);
-        $unit->update($validatedData);
 
+        $unit = Unit::where('id', $id);
+        toastr()->success('Sukses Mengupdate data unit');;
+        $unit->update($validatedData);
         return redirect()->back();
     }
     public function destroy(Unit $unit)
     {
         $unit->delete();
         return redirect()->back();
+        toastr()->success("Sukses Menghapus Unit dari $unit->car");
     }
 }

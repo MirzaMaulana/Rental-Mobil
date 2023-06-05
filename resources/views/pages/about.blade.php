@@ -19,7 +19,7 @@
                 Visi saya adalah menyediakan solusi transportasi yang mudah dan
                 nyaman bagi para pengguna. saya percaya bahwa mobil sewaan
                 adalah cara yang fleksibel dan efisien untuk menjelajahi
-                berbagai tempat, dan itulah mengapa kami menciptakan aplikasi
+                berbagai tempat, dan itulah mengapa saya menciptakan aplikasi
                 Car Rental yang inovatif.
             </p>
         </div>

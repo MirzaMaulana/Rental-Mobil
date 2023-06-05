@@ -35,7 +35,9 @@
                             >
                                 {{ $booking->created_at }}
 
-                                <small class="btn btn-sm btn-warning">
+                                <small
+                                    class="btn btn-sm {{ $booking->status == "Selesai" ? "btn-success" : "btn-warning" }}"
+                                >
                                     {{ $booking->status }}
                                 </small>
                             </small>
@@ -56,8 +58,8 @@
                                         name="status"
                                         value="Selesai"
                                     />
-                                    <button class="btn-success btn btn-sm px-5">
-                                        Selesai
+                                    <button class="btn-primary btn btn-sm px-5">
+                                        Kembalikan
                                     </button>
                                 </form>
                             @endif

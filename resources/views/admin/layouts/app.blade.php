@@ -31,7 +31,10 @@
             type="text/css"
             href="https://cdn.datatables.net/v/bs4-4.6.0/jq-3.6.0/dt-1.11.3/datatables.min.css"
         />
-
+        <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+            rel="stylesheet"
+        />
         <script
             src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
@@ -49,6 +52,11 @@
             crossorigin="anonymous"
         ></script>
         @yield("styles")
+        <style>
+            * {
+                font-family: "Open sans";
+            }
+        </style>
     </head>
     <body class="hold-transition sidebar-mini">
         @include("admin.layouts.navbar")

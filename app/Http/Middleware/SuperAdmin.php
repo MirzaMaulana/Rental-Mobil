@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Admin
+class SuperAdmin
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,9 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role == 'Admin' || auth()->user()->role == 'SuperAdmin') {
-            return $next($request);
+        if (auth()->user()->role != 'SuperAdmin') {
+            return redirect('/dashboard');
         }
-        return redirect('/');
+        return $next($request);
     }
 }

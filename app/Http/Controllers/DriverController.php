@@ -32,6 +32,7 @@ class DriverController extends Controller
         //menyimpan data
         $driver = Driver::create($data);
 
+        toastr()->success('Sukses Menambahkan Driver');
         return redirect()->back();
     }
 

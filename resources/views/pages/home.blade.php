@@ -1,6 +1,10 @@
 @extends("layouts.app")
 @section("content")
     <section id="header" class="container mx-auto mt-2">
+        <div class="loader-wrapper">
+            <div class="loader"></div>
+            <span class="ms-2 fw-semibold fs-4">Loading..</span>
+        </div>
         @if(session()->has("success"))
             <div
                 class="alert alert-success absolute alert-dismissible fade show container"

@@ -94,6 +94,18 @@
                                     {{ __("Register") }}
                                 </button>
                             </div>
+                            <hr />
+                            <div class="row text-center">
+                                <p>
+                                    Already register?
+                                    <a
+                                        href="{{ route("login") }}"
+                                        class="fw-bold text-decoration-none text-success"
+                                    >
+                                        Login
+                                    </a>
+                                </p>
+                            </div>
                         </form>
                     </div>
                 </div>
