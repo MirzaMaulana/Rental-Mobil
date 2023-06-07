@@ -41,28 +41,6 @@
                                     {{ $booking->status }}
                                 </small>
                             </small>
-                            @if($booking->status == "Disewa")
-                                <form
-                                    action="{{ route("booking.update", $booking->id) }}"
-                                    method="POST"
-                                >
-                                    @csrf
-                                    @method("put")
-                                    <input
-                                        type="hidden"
-                                        name="car_id"
-                                        value="{{ $booking->car_id }}"
-                                    />
-                                    <input
-                                        type="hidden"
-                                        name="status"
-                                        value="Selesai"
-                                    />
-                                    <button class="btn-primary btn btn-sm px-5">
-                                        Kembalikan
-                                    </button>
-                                </form>
-                            @endif
                         </div>
                     </div>
                 </div>

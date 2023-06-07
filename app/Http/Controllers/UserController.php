@@ -19,8 +19,7 @@ class UserController extends Controller
             }))
             ->addColumn('action', function ($user) {
                 return '
-            <div class="d-flex">
-                <form onsubmit="destroy(event)" action="" method="POST">
+              <form onsubmit="destroy(event)" action="' .  route('user.destroy', $user->id) . '" method="POST">
                     <input type="hidden" name="_token" value="' . @csrf_token() . '">
                     <input type="hidden" name="_method" value="DELETE">
                     <button class="btn-danger btn btn-sm  mr-2">
@@ -28,19 +27,17 @@ class UserController extends Controller
                     </button>
                     </td>
                 </form>
-                <button
-                type="button"
-                class="btn btn-primary btn-sm"
-                data-bs-toggle="modal"
-                data-bs-target="#ModalEdit' . $user->id . '"
-                >
-                    <i class="fa fa-pen-alt"></i>
-                </button>
-            </div>
         ';
             })
             ->addIndexColumn()
             ->escapeColumns(['action'])
             ->toJson();
+    }
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->back();
+
+        toastr()->success("Sukses Menghapus User $user->name");
     }
 }

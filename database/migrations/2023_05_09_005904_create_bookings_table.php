@@ -17,6 +17,10 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('car_id');
             $table->foreign('car_id')->references('id')->on('cars');
+            $table->unsignedBigInteger('unit_id')->nullable(); //boleh kosong
+            $table->foreign('unit_id')->references('id')->on('units');
+            $table->unsignedBigInteger('driver_id')->nullable(); //boleh kosong
+            $table->foreign('driver_id')->references('id')->on('drivers');
             $table->boolean('driver');
             $table->string('name');
             $table->string('alamat');

@@ -31,3 +31,8 @@
         transform: rotate(360deg);
     }
 }
+.background-lingkaran {
+    width: 350px;
+    height: 350px;
+    z-index: -9999;
+}

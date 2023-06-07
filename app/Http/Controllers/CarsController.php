@@ -112,7 +112,6 @@ class CarsController extends Controller
             'price' => ['required', 'integer'],
             'bensin' => ['required', 'string'],
             'gear' => ['required', 'string'],
-            'jumlah_unit' => ['required'],
             'status' => ['required'],
         ]);
 
@@ -130,7 +129,6 @@ class CarsController extends Controller
             'price' => $validatedData['price'],
             'bensin' => $validatedData['bensin'],
             'gear' => $validatedData['gear'],
-            'jumlah_unit' => $validatedData['jumlah_unit'],
             'status' => $validatedData['status'],
         ];
 

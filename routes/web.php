@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pesanan', [ViewController::class, 'pesanan'])->name('pesanan');
 });
 
-Route::middleware(['auth', 'admin', 'superadmin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('car')->group(function () {
         Route::controller(CarsController::class)->group(function () {
             Route::get('/create', 'create')->name('car.create');
@@ -77,7 +77,8 @@ Route::middleware(['auth', 'admin', 'superadmin'])->group(function () {
     Route::prefix('booking')->group(function () {
         Route::controller(BookingController::class)->group(function () {
             Route::delete('/{booking}', 'destroy')->name('booking.destroy');
-            Route::put('/update/{booking}', 'update')->name('booking.update');
+            Route::put('/confirm/{booking}', 'confirm')->name('booking.confirm');
+            Route::put('/return/{booking}', 'return')->name('booking.return');
             Route::get('/index',  'list')->name('booking.list');
             Route::get('/list',  'index')->name('booking.index');
         });
@@ -91,5 +92,6 @@ Route::prefix('user')->middleware('superadmin')->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/index', 'list')->name('user.list');
         Route::get('/list', 'index')->name('user.index');
+        Route::delete('/{user}', 'destroy')->name('user.destroy');
     });
 });

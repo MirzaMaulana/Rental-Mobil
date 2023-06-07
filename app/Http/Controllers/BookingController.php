@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cars;
 use App\Models\Unit;
 use App\Models\Booking;
+use App\Models\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -45,7 +46,15 @@ class BookingController extends Controller
 
     public function index()
     {
-        return view('admin.administrasi.listpemesanan');
+        $booking = Booking::all();
+        $driver = Driver::where('status', '=', 'Tersedia')->get();
+        $unit = Unit::where('status', '=', 'Tersedia')->get();
+
+        return view('admin.administrasi.listpemesanan', [
+            'drivers' => $driver,
+            'units' => $unit,
+            'bookings' => $booking,
+        ]);
     }
     public function list(Request $request)
     {
@@ -63,15 +72,15 @@ class BookingController extends Controller
             </td>
             </form>
         
-            <form action="' . route("booking.update", $booking->id) . '" method="POST">
-                <input type="hidden" name="_token" value="' . @csrf_token() . '">
-                <input type="hidden" name="_method" value="PUT">
-                <input type="hidden" name="car_id" value="' . $booking->car_id . '">
-                <input type="hidden" name="status" value="Disewa">
-                <button class="btn-info btn btn-sm">
-                Confirm
+            <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#ModalConfirm' . $booking->id . '"
+                >
+                    <i class="fa fa-pen-alt"></i>
                 </button>
-            </form>
+                </div>
             
                             
 
@@ -97,17 +106,87 @@ class BookingController extends Controller
             ->escapeColumns(['action'])
             ->toJson();
     }
-    public function update(Request $request, Booking $booking)
+    public function confirm(Request $request, Booking $booking)
     {
         $validatedData = $request->validate([
             'status' => ['required'],
+            'unit_id' => ['required'],
+            'car_id' => ['required']
         ]);
 
-        $booking->update($validatedData);
+        // Memanipulasi Unit
+        $unit = Unit::where('id', $validatedData['unit_id'])->first();
+        $unit->status = 'Disewa';
+        $unit->update();
 
-        toastr()->success('Sukses Mengupdate data pesanan');
+        // Mengurangi jumlah Unit di tabel car
+        $car = Cars::where('id', $validatedData['car_id'])->first();
+        $car->jumlah_unit -= 1;
+        $car->save();
+
+
+        $data = [
+            'status' => $validatedData['status'],
+            'unit_id' => $validatedData['unit_id'],
+        ];
+
+        // Memanipulasi driver (jika ada)
+        if ($request->has('driver_id')) {
+            $driver = Driver::find($request->driver_id);
+            if ($driver) {
+                $driver->status = 'Disewa';
+                $driver->save();
+                $data['driver_id'] = $driver->id;
+            }
+        }
+
+        // Mengupdate data booking
+        $booking->update($data);
+
+        toastr()->success('Sukses Mengkonfirmasi data pesanan');
         return redirect()->back();
     }
+
+    public function return(Request $request, Booking $booking)
+    {
+        $validatedData = $request->validate([
+            'status' => ['required'],
+            'unit_id' => ['required'],
+            'car_id' => ['required']
+        ]);
+
+        // Memanipulasi Unit
+        $unit = Unit::where('id', $validatedData['unit_id'])->first();
+        $unit->status = 'Tersedia';
+        $unit->update();
+
+        // Mengurangi jumlah Unit di tabel car
+        $car = Cars::where('id', $validatedData['car_id'])->first();
+        $car->jumlah_unit += 1;
+        $car->save();
+
+        $data = [
+            'status' => $validatedData['status'],
+            'unit_id' => $validatedData['unit_id'],
+        ];
+
+        // Memanipulasi driver (jika ada)
+        if ($request->has('driver_id')) {
+            $driver = Driver::find($request->driver_id);
+            if ($driver) {
+                $driver->status = 'Tersedia';
+                $driver->save();
+                $data['driver_id'] = $driver->id;
+            }
+        }
+
+        // Mengupdate data booking
+        $booking->update($data);
+
+        toastr()->success('Sukses Mengembalikan Kendaraan');
+        return redirect()->back();
+    }
+
     public function destroy(Booking $booking)
     {
         $path = public_path('storage/public/pembayaran/' . $booking->bukti_image);

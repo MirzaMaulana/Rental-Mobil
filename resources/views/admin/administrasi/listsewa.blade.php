@@ -10,8 +10,10 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Mobil</th>
-                                    <th>Nama User</th>
+                                    <th>Mobil</th>
+                                    <th>Unit</th>
+                                    <th>Driver</th>
+                                    <th>Nama</th>
                                     <th>Hari</th>
                                     <th>Alamat</th>
                                     <th>Nomer HP</th>
@@ -27,6 +29,10 @@
             </div>
         </div>
     </div>
+    @foreach($bookings as $booking)
+        @include("admin.administrasi.modalreturn")
+    @endforeach
+
     {{-- @include("admin.administrasi.modaledit") --}}
     <script>
         $(document).ready(function () {
@@ -42,6 +48,8 @@
                 columns: [
                     { data: "DT_RowIndex", sortable: false, searchable: false },
                     { data: "car_name" },
+                    { data: "unit" },
+                    { data: "driver" },
                     { data: "name" },
                     { data: "days" },
                     { data: "alamat" },

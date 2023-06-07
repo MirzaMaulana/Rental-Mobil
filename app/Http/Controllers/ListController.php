@@ -10,7 +10,10 @@ class ListController extends Controller
 
     public function sewa()
     {
-        return view('admin.administrasi.listsewa');
+        $booking = Booking::where('status', 'Disewa')->get();
+        return view('admin.administrasi.listsewa', [
+            'bookings' => $booking
+        ]);
     }
 
     public function selesai()
@@ -25,31 +28,36 @@ class ListController extends Controller
             ->addColumn('action', function ($booking) {
                 return '
             <div class="d-flex">
-            <form onsubmit="destroy(event)" action="' .  route('booking.destroy', $booking->id) . '" method="POST">
+            <form action="' .  route('booking.destroy', $booking->id) . '" method="POST">
             <input type="hidden" name="_token" value="' . @csrf_token() . '">
             <input type="hidden" name="_method" value="DELETE">
             <button class="btn-danger btn btn-sm  mr-2">
             <i class="fa fa-trash"></i>
             </button>
             </td>
-            </form>
-        
-            <form action="' . route("booking.update", $booking->id) . '" method="POST">
-                <input type="hidden" name="_token" value="' . @csrf_token() . '">
-                <input type="hidden" name="_method" value="PUT">
-                <input type="hidden" name="car_id" value="' . $booking->car_id . '">
-                <input type="hidden" name="status" value="Selesai">
-                <button class="btn-success btn btn-sm">
-                Selesai
-                </button>
-            </form>
-            
-                            
-
+            </form>    
+            <button
+                type="button"
+                class="btn btn-success btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#ModalReturn' . $booking->id . '"
+                >
+                    <i class="fa fa-check"></i>
+             </button>    
+            </div>                
         ';
             })
-            ->addColumn('car_name', function ($unit) {
-                return $unit->car->name;
+            ->addColumn('car_name', function ($booking) {
+                return $booking->car->name;
+            })
+
+            ->addColumn('unit', function ($booking) {
+                return $booking->unit->plat_nomer;
+            })
+
+            ->addColumn('driver', function ($driver) {
+                $driver = $driver->driver == '1' ? '<small class="badge badge-success">IYA</small>' : '<small class="badge badge-danger">TIDAK</small>';
+                return $driver;
             })
 
             ->addColumn('bukti_image', function ($booking) {
@@ -71,7 +79,7 @@ class ListController extends Controller
             ->addColumn('action', function ($booking) {
                 return '
             <div class="d-flex">
-            <form onsubmit="destroy(event)" action="' .  route('booking.destroy', $booking->id) . '" method="POST">
+            <form action="' .  route('booking.destroy', $booking->id) . '" method="POST">
             <input type="hidden" name="_token" value="' . @csrf_token() . '">
             <input type="hidden" name="_method" value="DELETE">
             <button class="btn-danger btn btn-sm  mr-2">

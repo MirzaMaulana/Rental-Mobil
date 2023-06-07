@@ -28,6 +28,10 @@
             </div>
         </div>
     </div>
+    @foreach($bookings as $booking)
+        @include("admin.administrasi.modalconfirm")
+    @endforeach
+
     {{-- @include("admin.administrasi.modaledit") --}}
     <script>
         $(document).ready(function () {
